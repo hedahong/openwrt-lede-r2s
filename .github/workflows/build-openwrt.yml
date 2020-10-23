@@ -75,6 +75,12 @@ jobs:
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
+      
+    - name: Download hdh's configuration file
+      run: |
+         cd openwrt
+         rm -f ./.config*
+         wget -c https://raw.githubusercontent.com/hedahong/openwrt-lede-r2s/main/r2s-config.txt -O .config
 
     - name: Load custom configuration
       run: |
