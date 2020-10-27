@@ -17,7 +17,7 @@ on:
       ssh:
         description: 'SSH connection to Actions'
         required: false
-        default: 'false'
+        default: 'true'
 #  schedule:
 #    - cron: 0 8 * * 5
 
@@ -60,7 +60,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        rm -rf openwrt && git clone $REPO_URL --depth=1 -b $REPO_BRANCH openwrt
+        rm -rf /workdir/openwrt && git clone $REPO_URL --depth=1 -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
@@ -82,7 +82,7 @@ jobs:
          rm -f ./.config*
          wget -c https://raw.githubusercontent.com/hedahong/openwrt-lede-r2s/main/r2s-config.txt -O .config
 
-    - name: Load custom configuration
+    - name: Load custom configuration2
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
